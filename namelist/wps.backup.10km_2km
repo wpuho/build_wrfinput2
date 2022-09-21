@@ -1,0 +1,58 @@
+&share
+ wrf_core = 'ARW',
+ max_dom = 2,
+ start_date = 'yyyy1-mm1-dd1_hh1:00:00','yyyy1-mm1-dd1_hh1:00:00','2017-08-21_12:00:00'
+ end_date   = 'yyyy2-mm2-dd2_hh2:00:00','yyyy1-mm1-dd1_hh1:00:00','2017-08-24_00:00:00'
+ interval_seconds = 21600
+ io_form_geogrid = 2,
+/
+
+&geogrid
+ parent_id         =   1,   1,   2,
+ parent_grid_ratio =   1,   5,   3,
+ i_parent_start    =   1,  129,  65,
+ j_parent_start    =   1,  180, 106,
+ e_we              = 501,  931, 487,
+ e_sn              = 450,  751, 280,
+ !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ ! The default datasets used to produce the MAXSNOALB and ALBEDO12M
+ ! fields have changed in WPS v4.0. These fields are now interpolated
+ ! from MODIS-based datasets.
+ !
+ ! To match the output given by the default namelist.wps in WPS v3.9.1,
+ ! the following setting for geog_data_res may be used:
+ !
+ ! geog_data_res = 'maxsnowalb_ncep+albedo_ncep+default', 'maxsnowalb_ncep+albedo_ncep+default', 
+ !
+ !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ !
+ geog_data_res = '30s+default','30s+default',
+! geog_data_res = 'default','default',
+ dx = 10000,
+ dy = 10000,
+ map_proj = 'lambert',
+ ref_lat   =  18.0,
+ ref_lon   =  117.0,
+ truelat1  =  20.0,
+ truelat2  =  28.0,
+ stand_lon =  115.9,
+! geog_data_path = '/stor400b/jbzambon/jcw/sandy/static_nest/wps/geog'
+! geog_data_path = '/home/wpuho/Models/DATA/GEOG/GEOG_V4'
+ geog_data_path = '/data2/lephuong/GEOG1'
+/
+
+&ungrib
+ out_format = 'WPS',
+ prefix = 'FILE',
+! prefix = 'PL',
+! prefix = 'SL',
+! prefix = 'SST',
+/
+
+&metgrid
+ constants_name = 'ERA5_INVARIANT:1979-01-01_00'
+! fg_name = 'GFS', 'SST',
+ fg_name = 'PL','SL','SST'
+ io_form_metgrid = 2, 
+/
